@@ -1,5 +1,5 @@
 node_modules/
-configs/
+config/
 error.log
 package-lock.json
 .env
