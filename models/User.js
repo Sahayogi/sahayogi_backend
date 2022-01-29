@@ -22,7 +22,7 @@ const UserSchema = new Schema({
   },
   status: {
     type: String,
-    default: "beneficiary",
+    default: "normal User",
   },
 });
 
