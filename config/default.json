@@ -1,4 +1,0 @@
-{
-    "ATLAS_URI": "mongodb+srv://sahayogi:sahayogi123@cluster0.sj2q5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    "jwtSecret": "sl_myJwtSecret"
-}
