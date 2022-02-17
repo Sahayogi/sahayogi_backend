@@ -1,7 +1,5 @@
 /node_modules
-
 error.log
 package-lock.json
 .env
 .vscode
-config.env
