@@ -17,6 +17,9 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth.js'));
+app.use('/api/admin', require('./routes/adminOnly'));
+app.use('/api/aidagency', require('./routes/aidagency'));
+app.use('/api/user', require('./routes/users'));
 // const logger = require('./utils/logger');
 // // const routeManager = require('./routes/api');
 // const { AppError, ERR } = require('./utils/error');
