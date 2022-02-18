@@ -13,7 +13,7 @@ exports.adminOnlyAccess = async (req, res, next) => {
   }
   console.log(token);
   if (!token) {
-    return next(new ErrorResponse('Not authorized to access this route', 401));
+    return next(new ErrorResponse('Not authorized to access this route t', 401));
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

@@ -14,6 +14,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
+app.use(cors());
+
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/admin', require('./routes/adminOnly'));
 app.use('/api/aidagency', require('./routes/aidagency'));
@@ -47,7 +49,7 @@ app.use('/api/user', require('./routes/users'));
 //   next();
 // });
 
-// app.use(cors());
+
 // global.AppError = AppError;
 // const limiter = rateLimit({
 //   windowMs: 1000, // 15 minutes

@@ -19,7 +19,7 @@ exports.aidAgencyList = async (req, res, next) => {
   const data = await User.find({ typeOfUser: 'AidAgency' });
   res.status(200).json({
     success: true,
-    data: data,
+    agencyList: data,
   });
 };
 exports.vendorList = async (req, res, next) => {

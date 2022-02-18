@@ -3,7 +3,7 @@ const ErrorResponse = require('../utils/errorResponse');
 
 exports.addVendor = async (req, res, next) => {
   const access_user = req.user;
-  const { username, email, password, location, phoneNumber } = req.body;
+  const { username, email, password, address, phoneNumber } = req.body;
   if (!username || !email || !password) {
     return next(new ErrorResponse('Please Input all field', 400));
   }
@@ -13,7 +13,7 @@ exports.addVendor = async (req, res, next) => {
       username,
       email,
       password,
-      location,
+      address,
       phoneNumber,
       typeOfUser,
     });
@@ -28,7 +28,7 @@ exports.addVendor = async (req, res, next) => {
 };
 exports.addBank = async (req, res, next) => {
   const access_user = req.user;
-  const { username, email, password, location, phoneNumber } = req.body;
+  const { username, email, password, address, phoneNumber } = req.body;
   if (!username || !email || !password) {
     return next(new ErrorResponse('Please Input all field', 400));
   }
@@ -38,7 +38,7 @@ exports.addBank = async (req, res, next) => {
       username,
       email,
       password,
-      location,
+      address,
       phoneNumber,
       typeOfUser,
     });
@@ -53,7 +53,7 @@ exports.addBank = async (req, res, next) => {
 };
 exports.addBeneficiary = async (req, res, next) => {
   const access_user = req.user;
-  const { username, email, password, location, phoneNumber } = req.body;
+  const { username, email, password, address, phoneNumber } = req.body;
   if (!username || !email || !password) {
     return next(new ErrorResponse('Please Input all field', 400));
   }
@@ -62,7 +62,7 @@ exports.addBeneficiary = async (req, res, next) => {
       username,
       email,
       password,
-      location,
+      address,
       phoneNumber,
     });
     res.status(200).json({

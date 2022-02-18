@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 exports.addAidAgency = async (req, res, next) => {
   console.log(req.user);
-  const { username, email, password, location, phoneNumber } = req.body;
+  const { username, email, password, address, phoneNumber } = req.body;
 
   if (!username || !email || !password) {
     return next(new ErrorResponse('Please Input all field', 400));
@@ -14,7 +14,7 @@ exports.addAidAgency = async (req, res, next) => {
       username,
       email,
       password,
-      location,
+      address,
       phoneNumber,
       typeOfUser,
     });
