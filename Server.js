@@ -20,6 +20,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/admin', require('./routes/adminOnly'));
 app.use('/api/aidagency', require('./routes/aidagency'));
 app.use('/api/user', require('./routes/users'));
+app.use('/api/project', require('./routes/project'));
 // const logger = require('./utils/logger');
 // // const routeManager = require('./routes/api');
 // const { AppError, ERR } = require('./utils/error');
@@ -48,7 +49,6 @@ app.use('/api/user', require('./routes/users'));
 //   // Pass to next layer of middleware
 //   next();
 // });
-
 
 // global.AppError = AppError;
 // const limiter = rateLimit({
