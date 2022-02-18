@@ -27,6 +27,10 @@ const projectSchema = new mongoose.Schema(
     createdBy: {
       type: String,
     },
+    status: {
+      type: Boolean,
+      default:true,
+    },
   },
   {
     timestamps: true,
