@@ -4,8 +4,6 @@ const express = require('express');
 const connectDb = require('./config/db');
 const errorHandler = require('./middleware/error');
 const cors = require('cors');
-const mongoose = require('mongoose');
-const config = require('config');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const compression = require('compression');
@@ -16,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
-app.use('/api/auth', require('./routes/auth.js'));
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/admin', require('./routes/adminOnly'));
 app.use('/api/aidagency', require('./routes/aidagency'));
 app.use('/api/user', require('./routes/users'));
@@ -94,18 +92,6 @@ app.use('/api/user', require('./routes/users'));
 //   });
 //   res.end();
 // });
-
-// Routing
-// const vendorRouter = require("./routes/vendor");
-// const projectsRouter = require("./routes/projects");
-// const aidAgencyRouter = require("./routes/aidAgency");
-// const beneficiaryRouter = require("./routes/beneficiary");
-// const transactRouter = require("./routes/transaction");
-// app.use("/vendor", vendorRouter);
-// app.use("/aidAgency", aidAgencyRouter);
-// app.use("/beneficiary", beneficiaryRouter);
-// app.use("/project", projectsRouter);
-// app.use("/transacttion", transactRouter);
 
 // Error handler should be last piece of middleware
 app.use(errorHandler);

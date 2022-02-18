@@ -35,6 +35,7 @@ const UserSchema = new mongoose.Schema({
   walletAddress: String,
   location: String,
   bankAccountNumber: String,
+  phoneNumber: String,
   typeOfUser: {
     type: String,
     default: 'Beneficiary',
