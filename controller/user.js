@@ -1,30 +1,39 @@
+const User = require('../models/User');
+const errorResponse = require('../utils/errorResponse');
+
 exports.home = (req, res, next) => {
   res.status(200).json({
     success: true,
     Data: 'Registered User access',
   });
 };
-exports.benefiaryList = (req, res, next) => {
+exports.beneficiaryList = async (req, res, next) => {
+  const data = await User.find({ typeOfUser: 'Beneficiary' });
+  console.log(data);
   res.status(200).json({
     success: true,
-    Data: 'BeneficiaryList Accessed',
+    data: data,
   });
 };
-exports.aidAgencyList = (req, res, next) => {
+exports.aidAgencyList = async (req, res, next) => {
+  const data = await User.find({ typeOfUser: 'AidAgency' });
   res.status(200).json({
     success: true,
-    Data: 'AidAgency List accessed',
+    data: data,
   });
 };
-exports.vendorList = (req, res, next) => {
+exports.vendorList = async (req, res, next) => {
+  const data = await User.find({ typeOfUser: 'Vendor' });
+
   res.status(200).json({
     success: true,
-    Data: 'VendorList List accessed',
+    data: data,
   });
 };
-exports.bankList = (req, res, next) => {
+exports.bankList = async (req, res, next) => {
+  const data = await User.find({ typeOfUser: 'Bank' });
   res.status(200).json({
     success: true,
-    Data: 'BankList List accessed',
+    data: data,
   });
 };

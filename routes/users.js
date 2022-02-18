@@ -4,7 +4,7 @@
 const express = require('express');
 const {
   home,
-  benefiaryList,
+  beneficiaryList,
   aidAgencyList,
   vendorList,
   bankList,
@@ -15,7 +15,7 @@ const {
 const router = express.Router();
 
 router.route('/home').get(registeredUserAccess, home);
-router.route('/beneficiaries').get(registeredUserAccess, benefiaryList);
+router.route('/beneficiaries').get(registeredUserAccess, beneficiaryList);
 router.route('/aidagencies').get(registeredUserAccess, aidAgencyList);
 router.route('/vendors').get(registeredUserAccess, vendorList);
 router.route('/banks').get(registeredUserAccess, bankList);
