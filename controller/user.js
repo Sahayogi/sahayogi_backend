@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Project = require('../models/Project');
 const errorResponse = require('../utils/errorResponse');
+const Project = require('../models/Project')
 
 exports.home = async (req, res, next) => {
   const numberOfVendor = await User.find({ typeOfUser: 'Vendor' }).count();

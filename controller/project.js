@@ -5,8 +5,8 @@ exports.createProject = async (req, res, next) => {
   console.log(req.user);
   const createdBy = req.user.username;
   console.log(req.body);
-
   const { projectName, targetedArea, description, beneficiaries } = req.body;
+
   if (!projectName || !targetedArea || !description) {
     next(new ErrorResponse('Please input all field', 400));
   }

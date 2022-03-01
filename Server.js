@@ -18,32 +18,32 @@ app.use(express.json());
 
 app.use(cors());
 
-// const storage = multer.diskStorage({
-//   destination: path.join(__dirname, "./public_html/", "uploads"),
-//   filename: function (req, file, cb) {
-//     //null as 1st argument means no error
-//     cb(null, Date.now() + "-" + file.originalname);
-//   },
-// });
+const storage = multer.diskStorage({
+  destination: path.join(__dirname, "./public_html/", "uploads"),
+  filename: function (req, file, cb) {
+    //null as 1st argument means no error
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
 
-// app.post("/imageupload", async (req, res) => {
-//   try {
-//     //projectavatar => name of our file input field in form
-//     let upload = multer({ storage: storage }).single("projectavatar");
-//     upload(req, res, function (err) {
-//       //req.file contains info of uploaded file
-//       //req.body contain info of text field
-//       console.log(req.file.path,"req.file");
-//       if (!req.file) {
-//         return res.send("please select an image to upload");
-//       } else if (err instanceof multer.MulterError) {
-//         return res.send(err);
-//       } else if (err) {
-//         return res.send(err);
-//       }
-//     });
-//   } catch (err) {}
-// });
+app.post("/imageupload", async (req, res) => {
+  try {
+    //projectavatar => name of our file input field in form
+    let upload = multer({ storage: storage }).single("projectavatar");
+    upload(req, res, function (err) {
+      //req.file contains info of uploaded file
+      //req.body contain info of text field
+      console.log(req.file.path,"req.file");
+      if (!req.file) {
+        return res.send("please select an image to upload");
+      } else if (err instanceof multer.MulterError) {
+        return res.send(err);
+      } else if (err) {
+        return res.send(err);
+      }
+    });
+  } catch (err) {}
+});
 
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/admin", require("./routes/adminOnly"));
