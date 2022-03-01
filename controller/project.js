@@ -90,20 +90,3 @@ exports.projectDetail = async (req, res, next) => {
     return next(new ErrorResponse('Project Not Found', 404));
   }
 };
-// app.post("/imageupload", async (req, res) => {
-//   try {
-//     //projectavatar => name of our file input field in form
-//     let upload = multer({ storage: storage }).single("projectavatar");
-//     upload(req, res, function (err) {
-//       //req.file contains info of uploaded file
-//       //req.body contain info of text field
-//       if (!req.file) {
-//         return res.send("please select an image to upload");
-//       } else if (err instanceof multer.MulterError) {
-//         return res.send(err);
-//       } else if (err) {
-//         return res.send(err);
-//       }
-//     });
-//   } catch (err) {}
-// });
