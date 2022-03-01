@@ -1,10 +1,25 @@
 const User = require('../models/User');
+const Project = require('../models/Project');
 const errorResponse = require('../utils/errorResponse');
 
-exports.home = (req, res, next) => {
+exports.home = async (req, res, next) => {
+  const numberOfVendor = await User.find({ typeOfUser: 'Vendor' }).count();
+  const numberOfBeneficiary = await User.find({
+    typeOfUser: 'Beneficiary',
+  }).count();
+  const numberOfBank = await User.find({ typeOfUser: 'Bank' }).count();
+  const numberOfProject = await Project.find().count();
+  const data = {
+    numberOfVendor,
+    numberOfBank,
+    numberOfBeneficiary,
+    numberOfProject,
+  };
+
+  // console.log(data);
   res.status(200).json({
     success: true,
-    Data: 'Registered User access',
+    data: data,
   });
 };
 exports.beneficiaryList = async (req, res, next) => {
