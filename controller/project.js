@@ -1,8 +1,10 @@
 const ErrorResponse = require('../utils/errorResponse');
 const Project = require('../models/Project');
+const User = require('../models/User');
 
 exports.createProject = async (req, res, next) => {
   console.log(req.user);
+  console.log(req.body);
   const createdBy = req.user.username;
   console.log(req.body);
 
@@ -28,7 +30,7 @@ exports.createProject = async (req, res, next) => {
       createdBy,
       beneficiaries: beneficiaryArray,
     });
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: 'Project added Successfully',
       project,
@@ -56,7 +58,7 @@ exports.deleteProject = (req, res, next) => {
 exports.projects = async (req, res, next) => {
   try {
     const projects = await Project.find();
-    res.status(400).json({
+    res.status(200).json({
       success: true,
       data: projects,
     });
@@ -78,10 +80,41 @@ exports.fetchFund = async (req, res, next) => {
   }
 };
 
+const getWallEmail = async (beneficiaries) => {
+  const walletEmail = [];
+  await beneficiaries.map(async (beneficiary) => {
+    const user = await User.findOne({ email: beneficiary });
+    // if (user) {
+    //   console.log('User exitst');
+    //   walletEmail.push({ beneficiary, wallet: user.walletAddress });
+    // } else {
+    //   walletEmail.push({
+    //     beneficiary: 'user Not Found',
+    //     wallet: 'Not FOund',
+    //   });
+    // }
+    walletEmail.push(user);
+  });
+  console.log(walletEmail);
+  return walletEmail;
+};
+
 exports.projectDetail = async (req, res, next) => {
-  console.log(req.params.id);
+  console.log(`id passed from front end`, req.params.id);
+
   try {
     const project = await Project.findById(req.params.id);
+    const {
+      beneficiaries,
+      projectName,
+      targetedArea,
+      description,
+      createdBy,
+      collectedToken,
+    } = project;
+
+    console.log('Get Wall EMail');
+    // const wallEmail = await getWallEmail(beneficiaries);
     res.status(200).json({
       success: true,
       data: project,

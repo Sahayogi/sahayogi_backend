@@ -32,7 +32,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  walletAddress: String,
+  walletAddress: {
+    type: String,
+    default: '',
+  },
   address: String,
   bankAccountNumber: String,
   phoneNumber: String,
@@ -69,7 +72,7 @@ UserSchema.methods.getSignedToken = function () {
     process.env.JWT_SECRET,
     {
       // expiresIn: process.env.JWT_EXPIRE,
-      expiresIn: '1d'
+      expiresIn: '1d',
     }
   );
 };

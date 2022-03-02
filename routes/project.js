@@ -8,6 +8,7 @@ const {
   updateProject,
   deleteProject,
   projectDetail,
+  projects,
   fetchFund,
 } = require('../controller/project');
 const {
@@ -15,7 +16,7 @@ const {
   registeredUserAccess,
 } = require('../middleware/protectRouteMiddleware');
 const router = express.Router();
-router.route('/projects').get(registeredUserAccess, updateProject);
+router.route('/').get(registeredUserAccess, projects);
 router.route('/fetch/:id').get(registeredUserAccess, fetchFund);
 router.route('/:id').get(registeredUserAccess, projectDetail);
 router.route('/add').post(aidAgencyAccess, createProject);
