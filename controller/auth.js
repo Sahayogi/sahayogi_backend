@@ -34,7 +34,12 @@ exports.login = async (req, res, next) => {
     if (!isMatch) {
       return next(new ErrorResponse('Invalid Credentials', 401));
     }
-    getToken(user, 200, res);
+    if (user.typeOfUser === 'Admin' || user.typeOfUser === 'AidAgency') {
+      getToken(user, 200, res);
+    } else {
+      console.log('no access');
+      return next(new ErrorResponse('Use Client Web instead', 400));
+    }
   } catch (error) {
     next(error);
   }
@@ -42,10 +47,11 @@ exports.login = async (req, res, next) => {
 
 const getToken = (user, statusCode, res) => {
   const token = user.getSignedToken();
-  res.status(statusCode).json({
+  return res.status(statusCode).json({
     success: true,
     token,
     role: user.typeOfUser,
     username: user.username,
+    email: user.email,
   });
 };

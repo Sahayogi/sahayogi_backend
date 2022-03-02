@@ -112,14 +112,35 @@ exports.projectDetail = async (req, res, next) => {
       createdBy,
       collectedToken,
     } = project;
+    const users = await User.find({ email: { $in: beneficiaries } });
+    const data = {
+      users,
+      projectName,
+      targetedArea,
+      description,
+      collectedToken,
+      createdBy,
+    };
 
-    console.log('Get Wall EMail');
-    // const wallEmail = await getWallEmail(beneficiaries);
     res.status(200).json({
       success: true,
-      data: project,
+      data: data,
     });
+    // res.status(200).json({
+    //   success: true,
+    //   data: project,
+    // });
   } catch (error) {
     return next(new ErrorResponse('Project Not Found', 404));
   }
+};
+
+exports.testProject = async (req, res, next) => {
+  const myList = ['agency11@gmail.com', 'agency2@gmail.com'];
+  const users = await User.find({ email: { $in: myList } });
+  res.status(200).json({
+    success: true,
+    data: 'Hello World',
+    users,
+  });
 };

@@ -1,15 +1,15 @@
 //  imports
-require("dotenv").config({ path: "./config.env" });
-const express = require("express");
-const connectDb = require("./config/db");
-const errorHandler = require("./middleware/error");
-const cors = require("cors");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const path = require("path");
-const multer = require("multer");
-const compression = require("compression");
-const rateLimit = require("express-rate-limit");
+require('dotenv').config({ path: './config.env' });
+const express = require('express');
+const connectDb = require('./config/db');
+const errorHandler = require('./middleware/error');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const path = require('path');
+const multer = require('multer');
+const compression = require('compression');
+const rateLimit = require('express-rate-limit');
 
 connectDb();
 const app = express();
@@ -19,23 +19,23 @@ app.use(express.json());
 app.use(cors());
 
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, "./public_html/", "uploads"),
+  destination: path.join(__dirname, './public_html/', 'uploads'),
   filename: function (req, file, cb) {
     //null as 1st argument means no error
-    cb(null, Date.now() + "-" + file.originalname);
+    cb(null, Date.now() + '-' + file.originalname);
   },
 });
 
-app.post("/imageupload", async (req, res) => {
+app.post('/imageupload', async (req, res) => {
   try {
     //projectavatar => name of our file input field in form
-    let upload = multer({ storage: storage }).single("projectavatar");
+    let upload = multer({ storage: storage }).single('projectavatar');
     upload(req, res, function (err) {
       //req.file contains info of uploaded file
       //req.body contain info of text field
-      console.log(req.file.path,"req.file");
+      console.log(req.file.path, 'req.file');
       if (!req.file) {
-        return res.send("please select an image to upload");
+        return res.send('please select an image to upload');
       } else if (err instanceof multer.MulterError) {
         return res.send(err);
       } else if (err) {
@@ -45,11 +45,12 @@ app.post("/imageupload", async (req, res) => {
   } catch (err) {}
 });
 
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/admin", require("./routes/adminOnly"));
-app.use("/api/aidagency", require("./routes/aidagency"));
-app.use("/api/user", require("./routes/users"));
-app.use("/api/project", require("./routes/project"));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/admin', require('./routes/adminOnly'));
+app.use('/api/aidagency', require('./routes/aidagency'));
+app.use('/api/user', require('./routes/users'));
+app.use('/api/project', require('./routes/project'));
+app.use('/api/wallet', require('./routes/wallet'));
 // const logger = require('./utils/logger');
 // // const routeManager = require('./routes/api');
 // const { AppError, ERR } = require('./utils/error');
@@ -132,7 +133,7 @@ const server = app.listen(PORT, () => {
 });
 
 // Handle crashed
-process.on("unhandledRejection", (err, promise) => {
+process.on('unhandledRejection', (err, promise) => {
   console.log(`Logged Error: ${err}`);
   server.close(() => process.exit(1));
 });

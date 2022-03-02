@@ -74,3 +74,26 @@ exports.addBeneficiary = async (req, res, next) => {
     next(error);
   }
 };
+
+// Change status
+exports.updateStatus = async (req, res, next) => {
+  console.log('update status');
+  console.log(req.params.id);
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return new ErrorResponse('No User Found', 404);
+    }
+    const status = user.status;
+    console.log(user);
+    console.log(status);
+    user.status = !status;
+    await user.save();
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

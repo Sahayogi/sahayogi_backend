@@ -18,7 +18,7 @@ const {
 const router = express.Router();
 router.route('/').get(registeredUserAccess, projects);
 router.route('/fetch/:id').get(registeredUserAccess, fetchFund);
-router.route('/:id').get(registeredUserAccess, projectDetail);
+router.route('/detail/:id').get(registeredUserAccess, projectDetail);
 router.route('/add').post(aidAgencyAccess, createProject);
 router.route('/update/:id').put(aidAgencyAccess, updateProject);
 router.route('/delete/:id').delete(aidAgencyAccess, deleteProject);
