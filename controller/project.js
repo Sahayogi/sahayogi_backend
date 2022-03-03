@@ -7,6 +7,7 @@ exports.createProject = async (req, res, next) => {
   console.log(req.body);
   const createdBy = req.user.username;
   console.log(req.body);
+  console.log('CreateProject Data Up');
 
   const {
     projectName,
