@@ -31,25 +31,31 @@ exports.addAidAgency = async (req, res, next) => {
 };
 
 exports.mapProject = async (req, res, next) => {
-  const { projectId, mongoId, goal, start, end } = req.body;
+  console.log(req.body);
+  const { project, goal, start, end, fundingCount } = req.body;
   // ProjectId here is blockchain project id
+  const updatedFrCount = parseInt(fundingCount);
   const parsedGoal = parseInt(goal);
-  console.log(parsedGoal);
-  const parsedBlockNumber = parseInt(projectId);
+  const updatedProjId = parseInt(project);
+  console.log(typeof updatedProjId);
   try {
-    const project = await Project.findById(mongoId);
+    const project = await Project.findOne({
+      relateBlockProj: updatedProjId,
+    });
     if (project) {
       project.goal = parsedGoal;
-      project.projectBlockId = parsedBlockNumber;
       project.start = start;
       project.end = end;
+      project.frCount = updatedFrCount;
+      console.log(project);
       await project.save();
+      res.status(200).json({
+        success: true,
+        data: 'project',
+      });
+    } else {
+      next(new ErrorResponse('No Project Found', 404));
     }
-
-    res.status(200).json({
-      success: true,
-      data: project,
-    });
   } catch (error) {
     next(error);
   }

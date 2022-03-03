@@ -77,6 +77,7 @@ exports.projects = async (req, res, next) => {
 };
 
 exports.fetchFund = async (req, res, next) => {
+  // ProjId is related to blockchain
   const { goal, start, end } = req.body;
   try {
     const project = await Project.findById(req.params.id);

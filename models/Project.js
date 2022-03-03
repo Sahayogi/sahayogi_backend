@@ -10,6 +10,7 @@ const projectSchema = new mongoose.Schema({
   relateBlockProj: {
     type: Number,
   },
+  frCount: Number,
   targetedArea: {
     type: String,
     required: [true, 'Please Provide targer area of project eg: Landslide'],

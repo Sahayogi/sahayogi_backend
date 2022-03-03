@@ -17,7 +17,7 @@ const {
 } = require('../middleware/protectRouteMiddleware');
 const router = express.Router();
 router.route('/').get(registeredUserAccess, projects);
-router.route('/fetch/:id').get(registeredUserAccess, fetchFund);
+router.route('/raise/:id').get(registeredUserAccess, fetchFund);
 router.route('/detail/:id').get(registeredUserAccess, projectDetail);
 router.route('/add').post(aidAgencyAccess, createProject);
 router.route('/update/:id').put(aidAgencyAccess, updateProject);
