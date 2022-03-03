@@ -7,6 +7,9 @@ const projectSchema = new mongoose.Schema({
     trim: true,
     minlength: 3,
   },
+  relateBlockProj: {
+    type: Number,
+  },
   targetedArea: {
     type: String,
     required: [true, 'Please Provide targer area of project eg: Landslide'],
@@ -32,11 +35,16 @@ const projectSchema = new mongoose.Schema({
   },
   start: {
     type: String,
+    default: '',
   },
   end: {
     type: String,
+    default: '',
   },
-  goal: Number,
+  goal: {
+    type: Number,
+    default: 0,
+  },
   beneficiaries: [{ type: String }],
 });
 

@@ -8,7 +8,13 @@ exports.createProject = async (req, res, next) => {
   const createdBy = req.user.username;
   console.log(req.body);
 
-  const { projectName, targetedArea, description, beneficiaries } = req.body;
+  const {
+    projectName,
+    targetedArea,
+    description,
+    beneficiaries,
+    relateProjId,
+  } = req.body;
   if (!projectName || !targetedArea || !description) {
     next(new ErrorResponse('Please input all field', 400));
   }
@@ -21,6 +27,7 @@ exports.createProject = async (req, res, next) => {
     });
     console.log(beneficiaryArray.length);
   }
+  const relateBlockProj = parseInt(relateProjId);
 
   try {
     const project = await Project.create({
@@ -29,6 +36,7 @@ exports.createProject = async (req, res, next) => {
       description,
       createdBy,
       beneficiaries: beneficiaryArray,
+      relateBlockProj,
     });
     return res.status(200).json({
       success: true,
