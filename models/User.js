@@ -43,6 +43,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: 'Beneficiary',
   },
+  addedToBlockchain: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Password Hash

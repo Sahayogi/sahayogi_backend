@@ -46,6 +46,7 @@ exports.mapProject = async (req, res, next) => {
       project.goal = parsedGoal;
       project.start = start;
       project.end = end;
+      project.claimed = false;
       project.frCount = updatedFrCount;
       console.log(project);
       await project.save();
@@ -57,6 +58,25 @@ exports.mapProject = async (req, res, next) => {
       next(new ErrorResponse('No Project Found', 404));
     }
   } catch (error) {
+    next(error);
+  }
+};
+
+//  Aidagencies are added to blockchain
+//  Admin only role  to call this func
+exports.addAgencyToBlock = async (req, res, next) => {
+  const { id } = req.body;
+  try {
+    const agency = await User.findById(id);
+    agency.addedToBlockchain = true;
+    console.log(agency);
+    await agency.save();
+    res.status(200).json({
+      success: true,
+      data: agency,
+    });
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 };
