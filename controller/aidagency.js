@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Project = require('../models/Project');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.addVendor = async (req, res, next) => {
@@ -92,6 +93,22 @@ exports.updateStatus = async (req, res, next) => {
     res.status(200).json({
       success: true,
       data: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+exports.claimProject = async (req, res, next) => {
+  const { projectId } = req.body;
+  console.log(projectId);
+  try {
+    const project = await Project.findById(projectId);
+    console.log(project);
+    project.claimed = true;
+    project.save();
+    res.status(200).json({
+      success: true,
+      data: project,
     });
   } catch (error) {
     next(error);

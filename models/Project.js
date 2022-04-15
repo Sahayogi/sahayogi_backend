@@ -48,7 +48,10 @@ const projectSchema = new mongoose.Schema({
   },
 
   beneficiaries: [{ type: String }],
-  claimed: Boolean,
+  claimed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Project = mongoose.model('Project', projectSchema);
