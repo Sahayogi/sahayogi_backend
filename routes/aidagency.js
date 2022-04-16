@@ -8,6 +8,7 @@ const {
   addBeneficiary,
   updateStatus,
   claimProject,
+  getChart,
 } = require('../controller/aidagency');
 const { aidAgencyAccess } = require('../middleware/protectRouteMiddleware');
 
@@ -16,4 +17,5 @@ router.route('/add/bank').post(aidAgencyAccess, addBank);
 router.route('/add/beneficiary').post(aidAgencyAccess, addBeneficiary);
 router.route('/status/:id').put(aidAgencyAccess, updateStatus);
 router.route('/claim/').post(aidAgencyAccess, claimProject);
+router.route('/chart').get(aidAgencyAccess, getChart);
 module.exports = router;

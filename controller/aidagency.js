@@ -114,3 +114,17 @@ exports.claimProject = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getChart = async (req, res, next) => {
+  try {
+    const projects = (
+      await Project.find().sort('-goal').select('projectName').select('goal')
+    ).splice(0, 5);
+    res.status(200).json({
+      success: true,
+      data: projects,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
